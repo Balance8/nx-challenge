@@ -1,0 +1,62 @@
+{
+  "npmScope": "todo-starter",
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e", "generate-gql"],
+        "strictlyOrderedTargets": ["generate-gql"]
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "projects": {
+    "api": {
+      "tags": []
+    },
+    "data-access": {
+      "tags": [],
+      "implicitDependencies": ["api"]
+    },
+    "feature-todos": {
+      "tags": []
+    },
+    "next-app": {
+      "tags": []
+    },
+    "next-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["next-app"]
+    },
+    "prisma-client": {
+      "tags": []
+    },
+    "shared-ui": {
+      "tags": []
+    },
+    "web-app": {
+      "tags": []
+    },
+    "web-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["web-app"]
+    }
+  }
+}

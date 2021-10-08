@@ -1,0 +1,72 @@
+fragment TicketFields on Ticket {
+  id
+  description
+  userId
+  completed
+  title
+}
+
+fragment Ticket on Ticket {
+  ...TicketFields
+  user {
+    ...UserFields
+  }
+}
+
+query findUniqueTicket($where: TicketWhereUniqueInput!) {
+  findUniqueTicket(where: $where) {
+    ...Ticket
+  }
+}
+
+query findManyTicket(
+  $where: TicketWhereInput
+  $orderBy: [TicketOrderByInput!]
+  $cursor: TicketWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyTicket(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+    ...Ticket
+  }
+}
+
+query findManyTicketCount(
+  $where: TicketWhereInput
+  $orderBy: [TicketOrderByInput!]
+  $cursor: TicketWhereUniqueInput
+  $skip: Int
+  $take: Int
+) {
+  findManyTicketCount(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take)
+}
+
+mutation createOneTicket($data: TicketCreateInput!) {
+  createOneTicket(data: $data) {
+    ...Ticket
+  }
+}
+
+mutation updateOneTicket($where: TicketWhereUniqueInput!, $data: TicketUpdateInput!) {
+  updateOneTicket(where: $where, data: $data) {
+    ...Ticket
+  }
+}
+
+mutation deleteOneTicket($where: TicketWhereUniqueInput!) {
+  deleteOneTicket(where: $where) {
+    ...Ticket
+  }
+}
+
+mutation deleteManyTicket($where: TicketWhereInput) {
+  deleteManyTicket(where: $where) {
+    count
+  }
+}
+
+mutation updateManyTicket($where: TicketWhereInput, $data: TicketUpdateManyMutationInput!) {
+  updateManyTicket(where: $where, data: $data) {
+    count
+  }
+}

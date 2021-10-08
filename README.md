@@ -61,7 +61,7 @@ Re-run `yarn nx run-many --target=serve --all --parallel`
 ![App Screenshot](https://i.imgur.com/tz7ivP1.png)
 
 **Database Relationships**
-![App Screenshot](https://imgur.com/YQo9iVi)
+![App Screenshot](https://i.imgur.com/YQo9iVi.png)
 
 ## Running Tests
 

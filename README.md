@@ -1,94 +1,134 @@
+# Ticket Project
 
+This project explores what it means to combine Nx/Nextjs/Prisma/Graphql and Nexus auto code generation. It features Code first Schema Generation, with end-to-end type safety provided by Prisma and Nexus. This project highlights code splitting and sharing from NX workspaces and allows multiple web apps to consume a single graphql endpoint and render/edit/update data as they see fit.
 
-# TodoStarter
+This project also showcases how incredibly reusable tailwind is when you are looking for a consistent code quality for CSS.
 
-This project was generated using [Nx](https://nx.dev).
+I completed this project (part one and part two) in 5 hours.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+## Run Locally
 
-🔎 **Smart, Extensible Build Framework**
+Clone the project
 
-## Adding capabilities to your workspace
+```bash
+git clone git@github.com:Balance8/nx-challenge.git
+```
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+Cd into the project
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+```bash
+cd nx-challenge
+```
 
-Below are our core plugins:
+Install dependencies
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+```bash
+yarn
+//or
+npm install
+```
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+create an .env file at the root with this variable
 
-## Generate an application
+```bash
+DATABASE_URL="file:/tmp/todo-starter/todo.db"
+```
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+Then run these commands
 
-> You can use any of the plugins above to generate applications as well.
+```bash
+pal g --config apps/api/pal.js
+yarn nx run-many --target=generate-gql --all
+yarn nx run-many --target=serve --all --parallel
+```
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+If you recieve an error, delete the dist folder as well as `apps/api/src/generated/nexus.ts` & `apps/api/src/generated/schema.graphql`
 
-## Generate a library
+Re-run `yarn nx run-many --target=serve --all --parallel`
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+## Screenshots
 
-> You can also use any of the plugins above to generate libraries as well.
+**Home Page:**
+![App Screenshot](https://i.imgur.com/CD7nO7Q.png)
 
-Libraries are shareable across libraries and applications. They can be imported from `@todo-starter/mylib`.
+**Create Page:**
+![App Screenshot](https://i.imgur.com/yBMnmX3.png)
 
-## Development server
+**Ticket Page:**
+![App Screenshot](https://i.imgur.com/cEvTYMM.png)
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+**Edit Page:**
+![App Screenshot](https://i.imgur.com/tz7ivP1.png)
 
-## Code scaffolding
+## Running Tests
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+To run tests, run the following command
 
-## Build
+```bash
+  yarn nx run next-app-e2e:e2e --no-exit
+```
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Make Sure you have the API running in the background or else the three tests will fail.
 
-## Running unit tests
+## Create Ticket
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+```javascript
+it('Create Ticket', function () {
+  /* ==== Generated with Cypress Studio ==== */
+  cy.visit('http://localhost:4200/');
+  cy.get('.mt-5 > :nth-child(1) > .flex').should('be.visible');
+  cy.get('.mt-5 > :nth-child(1) > .flex').click();
+  cy.get('.py-5').should('be.visible');
+  cy.get('#title').clear();
+  cy.get('#title').type('New Ticket');
+  cy.get('#user').select('1');
+  cy.get('#description').clear();
+  cy.get('#description').type('New Test');
+  cy.get('#completed').should('not.be.checked');
+  cy.get('.inline-flex').click();
+  /* ==== End Cypress Studio ==== */
+});
+```
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+## Check Filtering
 
-## Running end-to-end tests
+```javascript
+/* ==== Test Created with Cypress Studio ==== */
+it('Check Filtering', function () {
+  /* ==== Generated with Cypress Studio ==== */
+  cy.get('.w-40 > .flex').should('have.text', 'Pending');
+  cy.get('.w-40 > .flex').click();
+  cy.get('.w-40 > .flex').should('have.text', 'Done');
+  cy.get(
+    '[href="/ticket/1"] > :nth-child(2) > .focus\\:outline-none > .relative > .flex > #comments'
+  ).should('be.checked');
+  /* ==== End Cypress Studio ==== */
+});
+```
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+## Edit Ticket
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+```javascript
+/* ==== Test Created with Cypress Studio ==== */
+it('Edit Ticket', function () {
+  /* ==== Generated with Cypress Studio ==== */
+  cy.get('[href="/ticket/3"]').should('be.visible');
+  cy.get('[href="/ticket/3"]').click();
+  cy.get('.p-5').should('be.visible');
+  cy.get('.text-indigo-700').click();
+  cy.get('#user').select('1');
+  cy.get('#user').should('have.id', 'user');
+  cy.get('.inline-flex').click();
+  /* ==== End Cypress Studio ==== */
+});
+```
 
-## Understand your workspace
+## Further Reading
 
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+I would highly encourage a read into these blog posts about this topic:
 
-## Further help
+- https://vitaterna.ca/using-apollo-prisma-and-nexus-with-react-in-an-nx-workspace?fbclid=IwAR3gzsgf2W-qz7Hp0v_j_hTczCwMPBAfmOtRRa0MkVflJtmozHP2wATY-i4
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+and
 
-
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+- https://blog.nrwl.io/create-a-next-js-web-app-with-nx-bcf2ab54613

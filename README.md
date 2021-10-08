@@ -60,6 +60,9 @@ Re-run `yarn nx run-many --target=serve --all --parallel`
 **Edit Page:**
 ![App Screenshot](https://i.imgur.com/tz7ivP1.png)
 
+**Database Relationships**
+![App Screenshot](https://imgur.com/YQo9iVi)
+
 ## Running Tests
 
 To run tests, run the following command

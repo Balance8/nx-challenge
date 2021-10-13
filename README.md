@@ -75,9 +75,10 @@ Re-run `yarn nx run-many --target=serve --all --parallel`
 
 ## Running Tests
 
-To run tests, run the following command
+To run tests, turn off your client and server and run the following commands:
 
 ```bash
+  yarn nx run api:serve
   yarn nx run next-app-e2e:e2e --no-exit
 ```
 

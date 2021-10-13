@@ -145,3 +145,8 @@ I would highly encourage a read into these blog posts about this topic:
 and
 
 - https://blog.nrwl.io/create-a-next-js-web-app-with-nx-bcf2ab54613
+
+## Known Issues
+
+- You will have to refresh the page to show any changes to the tickets, due to time constraints I did not implement any refetches or better cache control.
+- Normally I would seed data for ease of use, due to time constraints I opted not to.

@@ -112,14 +112,14 @@ it('Create Ticket', function () {
 
 ```javascript
 /* ==== Test Created with Cypress Studio ==== */
-it('Check Filtering', function () {
+it('Check Filter', function () {
   /* ==== Generated with Cypress Studio ==== */
-  cy.get('.w-40 > .flex').should('have.text', 'Pending');
   cy.get('.w-40 > .flex').click();
-  cy.get('.w-40 > .flex').should('have.text', 'Done');
-  cy.get(
-    '[href="/ticket/1"] > :nth-child(2) > .focus\\:outline-none > .relative > .flex > #comments'
-  ).should('be.checked');
+  cy.get('.place-items-stretch > .grid > :nth-child(1)').click();
+  cy.get('.grid > :nth-child(4)').should(
+    'have.text',
+    'Task Status: Completed'
+  );
   /* ==== End Cypress Studio ==== */
 });
 ```

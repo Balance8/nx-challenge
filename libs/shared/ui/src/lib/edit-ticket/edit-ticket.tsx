@@ -1,4 +1,5 @@
 import {
+  FindManyTicketDocument,
   useCreateOneTicketMutation,
   useFindManyTicketQuery,
   useFindManyUserQuery,
@@ -7,8 +8,6 @@ import {
 import { useState } from 'react';
 import router, { useRouter } from 'next/router';
 import { Ticket as TicketType } from '@todo-starter/data-access';
-import { error } from 'console';
-import ticket from '../ticket/ticket';
 
 /* eslint-disable-next-line */
 export interface EditTicketProps {

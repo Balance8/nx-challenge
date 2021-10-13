@@ -8,19 +8,19 @@ I completed this project (part one and part two) in 5 hours.
 
 ## Run Locally
 
-Clone the project
+Clone the project:
 
 ```bash
 git clone git@github.com:Balance8/nx-challenge.git
 ```
 
-Cd into the project
+Cd into the project:
 
 ```bash
 cd nx-challenge
 ```
 
-Install dependencies
+Install dependencies:
 
 ```bash
 yarn
@@ -28,19 +28,29 @@ yarn
 npm install
 ```
 
-create an .env file at the root with this variable
+create an .env file at the root with this variable:
 
 ```bash
 DATABASE_URL="file:/tmp/todo-starter/todo.db"
 ```
 
-Then run these commands
+Then run these commands:
 
 ```bash
-pal g --config apps/api/pal.js
-yarn nx run-many --target=generate-gql --all
+yarn prisma db push
 yarn nx run-many --target=serve --all --parallel
 ```
+
+Then run:
+
+```bash
+yarn prisma studio
+```
+
+- This command will open up the Prisma studio window.  
+- Here, you will create a few new users under the user table.  
+- Once the users are created, you can create a new Ticket from the apps main menu and assign it to a user.
+![App Screenshot](https://i.imgur.com/emiOTr1.png)
 
 If you recieve an error, delete the dist folder as well as `apps/api/src/generated/nexus.ts` & `apps/api/src/generated/schema.graphql`
 

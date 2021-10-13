@@ -1,11 +1,5 @@
-import {
-  useFindUniqueTicketQuery,
-  useFindManyTicketQuery,
-  FindUniqueTicketDocument,
-  FindManyTicketDocument,
-  SortOrder,
-} from '@todo-starter/data-access';
-import { error } from 'console';
+import { useFindManyTicketQuery } from '@todo-starter/data-access';
+
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 

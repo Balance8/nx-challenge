@@ -20,8 +20,25 @@ export function Card(props: CardProps) {
     },
   });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center">
+        <p>Loading...</p>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="flex justify-center">
+        <p>Error... :(</p>
+      </div>
+    );
+  if (data?.findManyTicket.length === 0)
+    return (
+      <div className="flex justify-center">
+        <p>Create a new ticket!</p>
+      </div>
+    );
 
   return (
     <div className="flex justify-center">
